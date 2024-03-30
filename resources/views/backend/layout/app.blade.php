@@ -82,7 +82,7 @@
                 <a href="{{ route('category.index') }}" wire:navigate> Add Category </a>
               </li>
               <li>
-                <a href="blank-page.html" class="active"> Sub Category </a>
+                <a href="{{ route('subcategory.index') }}" class="active"> Sub Category </a>
               </li>
             </ul>
           </li>

@@ -7,7 +7,7 @@
                 <div class="col-lg-8 table-responsive shadow p-2 h-100">
                     <table class="table table-hover table-striped ">
                         <tr>
-                            <td>Sn</td>
+                            <td style="text-align: center ">Sn</td>
                             <td>Category</td>
                             <td>Action</td>
                         </tr>
@@ -15,7 +15,7 @@
 
                         @forelse ($categorys as $key=>$category)
                             <tr>
-                                <td>{{ $categorys->firstItem() + $key }}</td>
+                                <td style="text-align: center ">{{ $categorys->firstItem() + $key }}</td>
                                 <td>{{ Str::upper($category->category_slug) }}</td>
                                 <td>
                                     <div class="btn-group">
@@ -36,16 +36,18 @@
                     <div class="col-lg-4">
                         <div class="card shadow">
                             <div class="card-header bg-primary">
-                                <h4 class="text-light">Add Category</h4>
+                                <h4 class="text-light"> {{ request()->routeIs('category.index') ? 'Add Category' : 'Edit Category' }} </h4>
                             </div>
-                            <form action="{{ request()->routeIs('category.index') ? route('category.add') : route('category.edit', $editedCategory->id) }}" method="POST" class="p-3">
+                            <form action="{{ request()->routeIs('category.index') ? route('category.add') : route('category.update', $editedCategory->id) }}" method="POST" class="p-3">
                                 @csrf
+                                @if (request()->routeIs('category.edit'))
+                                    @method( 'PUT')
+                                @endif
                                 <label for="category_name">Category Name</label>
-                                <input id="category_name" name="category_name" type="text" class="form-control" placeholder="category">
+                                <input id="category_name" value="{{ request()->routeIs('category.index') ? '' : $editedCategory->category_name }}" name="category_name" type="text" class="form-control" placeholder="category">
                                 @error('category_name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-
                                 <button class="btn btn-primary w-100 my-2">Submit</button>
                             </form>
                         </div>
