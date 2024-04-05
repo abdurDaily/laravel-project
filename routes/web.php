@@ -48,6 +48,10 @@ Route::controller(CategoryController::class)->name('category.')->group(function 
 // :::::::::: SUB-CATEGORY :::::::::::
 Route::controller(SubCategoryController::class)->name('subcategory.')->group(function(){
     Route::get('/sub-category', 'subCategory')->name('index');
+    Route::post('/sub-category', 'storeOrUpdate')->name('add');
+    Route::get('/edit-subcategory/{id}', 'editSubCategory')->name('edit');
+    Route::put('/update-subcategory/{id?}', 'storeOrUpdate')->name('update');
+    Route::get('/delete-subcategory/{id}', 'deleteSubCategory')->name('delete');
 });
 
 

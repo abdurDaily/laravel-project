@@ -27,8 +27,8 @@ class CategoryController extends Controller
         $category->category_name = $request->category_name ?? $request->category_name;
         $category->category_slug = Str::slug($request->category_name) ??  Str::slug($request->category_name);
         $category->save();
-        Alert::toast('Success', 'success');
         return back();  
+        Alert::toast('Success', 'success');
     }
 
     
