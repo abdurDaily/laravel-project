@@ -19,6 +19,14 @@ class SubCategoryController extends Controller
     }
 
 
+
+    public function subCategoryAjax(Request $request) {
+      $searchQuery =  $request->searchName; 
+      $results = SubCategory::with('category')->where('sub_category', 'like', "%$searchQuery%")->get();
+      return $results;
+    }
+
+
     // :::::::::: STORE OR UPDATE :::::::::::
     public function storeOrUpdate(Request $request, $id=null){
       $subCategory = SubCategory::findOrNew($id);
